@@ -1,0 +1,1975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gulu University Journal | Academic Journal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            300: '#86efac',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #86efac;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4ade80;
+        }
+        
+        /* Sidebar animation */
+        @keyframes slideIn {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+        
+        .sidebar-animate {
+            animation: slideIn 0.3s ease-out forwards;
+        }
+        
+        /* Page transition */
+        .page-transition {
+            transition: opacity 0.3s ease;
+        }
+        
+        .fade-out {
+            opacity: 0;
+        }
+        
+        .fade-in {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans antialiased">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Mobile sidebar backdrop (hidden by default) -->
+        <div id="mobileSidebarBackdrop" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden"></div>
+        
+        <!-- Main sidebar -->
+        <aside id="mainSidebar" class="hidden md:flex md:flex-shrink-0">
+            <div class="flex flex-col w-64 border-r border-gray-200 bg-white">
+                <!-- Logo -->
+                <div class="flex items-center justify-center h-16 px-4 bg-primary-700">
+                    <div class="flex items-center">
+                        <i class="fas fa-book-open text-white text-2xl mr-2"></i>
+                        <span class="text-white font-bold text-xl">Gulu University Journal</span>
+                    </div>
+                </div>
+                
+                <!-- Main navigation -->
+                <nav class="flex-1 px-4 py-4 overflow-y-auto">
+                    <div class="space-y-1">
+                        <a href="#" data-page="home" class="sidebar-link group flex items-center px-4 py-3 text-sm font-medium rounded-lg text-primary-700 bg-primary-50">
+                            <i class="fas fa-home mr-3 text-primary-600"></i>
+                            Home
+                        </a>
+                        
+                        <a href="#" data-page="about" class="sidebar-link group flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-700 hover:text-primary-700 hover:bg-primary-50">
+                            <i class="fas fa-info-circle mr-3 text-gray-500 group-hover:text-primary-600"></i>
+                            About Journal
+                        </a>
+                        
+                        <a href="#" data-page="submissions" class="sidebar-link group flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-700 hover:text-primary-700 hover:bg-primary-50">
+                            <i class="fas fa-upload mr-3 text-gray-500 group-hover:text-primary-600"></i>
+                            Submissions
+                        </a>
+                        
+                        <a href="#" data-page="current" class="sidebar-link group flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-700 hover:text-primary-700 hover:bg-primary-50">
+                            <i class="fas fa-newspaper mr-3 text-gray-500 group-hover:text-primary-600"></i>
+                            Current Issue
+                        </a>
+                        
+                        <a href="#" data-page="archive" class="sidebar-link group flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-700 hover:text-primary-700 hover:bg-primary-50">
+                            <i class="fas fa-archive mr-3 text-gray-500 group-hover:text-primary-600"></i>
+                            Archives
+                        </a>
+                        
+                        <a href="#" data-page="editorial" class="sidebar-link group flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-700 hover:text-primary-700 hover:bg-primary-50">
+                            <i class="fas fa-users mr-3 text-gray-500 group-hover:text-primary-600"></i>
+                            Editorial Board
+                        </a>
+                        
+                        <a href="#" data-page="contact" class="sidebar-link group flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-700 hover:text-primary-700 hover:bg-primary-50">
+                            <i class="fas fa-envelope mr-3 text-gray-500 group-hover:text-primary-600"></i>
+                            Contact
+                        </a>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h3 class="px-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Additional Links</h3>
+                        <div class="mt-2 space-y-1">
+                            <a href="#" class="group flex items-center px-4 py-2 text-sm font-medium text-gray-700 rounded-lg hover:text-primary-700 hover:bg-primary-50">
+                                <i class="fas fa-search mr-3 text-gray-400 group-hover:text-primary-600"></i>
+                                Search Articles
+                            </a>
+                            <a href="#" class="group flex items-center px-4 py-2 text-sm font-medium text-gray-700 rounded-lg hover:text-primary-700 hover:bg-primary-50">
+                                <i class="fas fa-graduation-cap mr-3 text-gray-400 group-hover:text-primary-600"></i>
+                                Author Guidelines
+                            </a>
+                            <a href="#" class="group flex items-center px-4 py-2 text-sm font-medium text-gray-700 rounded-lg hover:text-primary-700 hover:bg-primary-50">
+                                <i class="fas fa-question-circle mr-3 text-gray-400 group-hover:text-primary-600"></i>
+                                FAQ
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+                
+                <!-- User profile -->
+                <div class="p-4 border-t border-gray-200">
+                    <div class="flex items-center">
+                        <img class="w-10 h-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="User profile">
+                        <div class="ml-3">
+                            <p class="text-sm font-medium text-gray-700">Dr. Researcher</p>
+                            <a href="#" class="text-xs font-medium text-primary-600 hover:text-primary-700">View profile</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- Mobile sidebar -->
+        <aside id="mobileSidebar" class="fixed inset-y-0 left-0 z-40 w-64 bg-white transform -translate-x-full transition-transform duration-300 ease-in-out">
+            <div class="flex flex-col h-full">
+                <!-- Logo -->
+                <div class="flex items-center justify-center h-16 px-4 bg-primary-700">
+                    <div class="flex items-center">
+                        <i class="fas fa-book-open text-white text-2xl mr-2"></i>
+                        <span class="text-white font-bold text-xl">Gulu University Journal</span>
+                    </div>
+                </div>
+                
+                <!-- Main navigation -->
+                <nav class="flex-1 px-4 py-4 overflow-y-auto">
+                    <div class="space-y-1">
+                        <a href="#" data-page="home" class="sidebar-link group flex items-center px-4 py-3 text-sm font-medium rounded-lg text-primary-700 bg-primary-50">
+                            <i class="fas fa-home mr-3 text-primary-600"></i>
+                            Home
+                        </a>
+                        
+                        <a href="#" data-page="about" class="sidebar-link group flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-700 hover:text-primary-700 hover:bg-primary-50">
+                            <i class="fas fa-info-circle mr-3 text-gray-500 group-hover:text-primary-600"></i>
+                            About Journal
+                        </a>
+                        
+                        <a href="#" data-page="submissions" class="sidebar-link group flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-700 hover:text-primary-700 hover:bg-primary-50">
+                            <i class="fas fa-upload mr-3 text-gray-500 group-hover:text-primary-600"></i>
+                            Submissions
+                        </a>
+                        
+                        <a href="#" data-page="current" class="sidebar-link group flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-700 hover:text-primary-700 hover:bg-primary-50">
+                            <i class="fas fa-newspaper mr-3 text-gray-500 group-hover:text-primary-600"></i>
+                            Current Issue
+                        </a>
+                        
+                        <a href="#" data-page="archive" class="sidebar-link group flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-700 hover:text-primary-700 hover:bg-primary-50">
+                            <i class="fas fa-archive mr-3 text-gray-500 group-hover:text-primary-600"></i>
+                            Archives
+                        </a>
+                        
+                        <a href="#" data-page="editorial" class="sidebar-link group flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-700 hover:text-primary-700 hover:bg-primary-50">
+                            <i class="fas fa-users mr-3 text-gray-500 group-hover:text-primary-600"></i>
+                            Editorial Board
+                        </a>
+                        
+                        <a href="#" data-page="contact" class="sidebar-link group flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-700 hover:text-primary-700 hover:bg-primary-50">
+                            <i class="fas fa-envelope mr-3 text-gray-500 group-hover:text-primary-600"></i>
+                            Contact
+                        </a>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h3 class="px-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Additional Links</h3>
+                        <div class="mt-2 space-y-1">
+                            <a href="#" class="group flex items-center px-4 py-2 text-sm font-medium text-gray-700 rounded-lg hover:text-primary-700 hover:bg-primary-50">
+                                <i class="fas fa-search mr-3 text-gray-400 group-hover:text-primary-600"></i>
+                                Search Articles
+                            </a>
+                            <a href="#" class="group flex items-center px-4 py-2 text-sm font-medium text-gray-700 rounded-lg hover:text-primary-700 hover:bg-primary-50">
+                                <i class="fas fa-graduation-cap mr-3 text-gray-400 group-hover:text-primary-600"></i>
+                                Author Guidelines
+                            </a>
+                            <a href="#" class="group flex items-center px-4 py-2 text-sm font-medium text-gray-700 rounded-lg hover:text-primary-700 hover:bg-primary-50">
+                                <i class="fas fa-question-circle mr-3 text-gray-400 group-hover:text-primary-600"></i>
+                                FAQ
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+                
+                <!-- User profile -->
+                <div class="p-4 border-t border-gray-200">
+                    <div class="flex items-center">
+                        <img class="w-10 h-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="User profile">
+                        <div class="ml-3">
+                            <p class="text-sm font-medium text-gray-700">Dr. Researcher</p>
+                            <a href="#" class="text-xs font-medium text-primary-600 hover:text-primary-700">View profile</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- Main content area -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Top navigation -->
+            <header class="bg-white shadow-sm z-10">
+                <div class="flex items-center justify-between px-4 py-3">
+                    <!-- Mobile menu button -->
+                    <button id="mobileSidebarButton" class="md:hidden text-gray-500 hover:text-gray-600 focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                    
+                    <!-- Search bar -->
+                    <div class="flex-1 max-w-md mx-4">
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-search text-gray-400"></i>
+                            </div>
+                            <input class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 sm:text-sm" placeholder="Search articles..." type="search">
+                        </div>
+                    </div>
+                    
+                    <!-- Right side buttons -->
+                    <div class="flex items-center space-x-4">
+                        <button class="text-gray-500 hover:text-gray-600 focus:outline-none">
+                            <i class="fas fa-bell text-xl"></i>
+                        </button>
+                        <button class="text-gray-500 hover:text-gray-600 focus:outline-none">
+                            <i class="fas fa-cog text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Secondary navigation -->
+                <div class="bg-gray-50 border-t border-b border-gray-200 px-4 py-2">
+                    <div class="flex overflow-x-auto space-x-6">
+                        <a href="#" class="whitespace-nowrap text-sm font-medium text-primary-700 border-b-2 border-primary-700 py-2 px-1">Latest Articles</a>
+                        <a href="#" class="whitespace-nowrap text-sm font-medium text-gray-500 hover:text-gray-700 py-2 px-1">Most Cited</a>
+                        <a href="#" class="whitespace-nowrap text-sm font-medium text-gray-500 hover:text-gray-700 py-2 px-1">Trending</a>
+                        <a href="#" class="whitespace-nowrap text-sm font-medium text-gray-500 hover:text-gray-700 py-2 px-1">Special Issues</a>
+                        <a href="#" class="whitespace-nowrap text-sm font-medium text-gray-500 hover:text-gray-700 py-2 px-1">Early Access</a>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Main content -->
+            <main class="flex-1 overflow-y-auto focus:outline-none bg-gray-50">
+                <!-- Page content -->
+                <div id="pageContent" class="page-transition fade-in">
+                    <!-- Home page content (default) -->
+                    <div data-page-content="home" class="p-6">
+                        <div class="max-w-7xl mx-auto">
+                            <div class="mb-8">
+                                <h1 class="text-3xl font-bold text-gray-900 mb-2">Welcome to Gulu University Journal</h1>
+                                <p class="text-lg text-gray-600">A premier open-access journal publishing high-quality research across all disciplines</p>
+                            </div>
+                            
+                            <!-- Stats cards -->
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                                <div class="bg-white rounded-lg shadow p-6">
+                                    <div class="flex items-center">
+                                        <div class="p-3 rounded-full bg-primary-100 text-primary-700 mr-4">
+                                            <i class="fas fa-file-alt text-xl"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm font-medium text-gray-500">Published Articles</p>
+                                            <p class="text-2xl font-bold text-gray-900">1,284</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-white rounded-lg shadow p-6">
+                                    <div class="flex items-center">
+                                        <div class="p-3 rounded-full bg-primary-100 text-primary-700 mr-4">
+                                            <i class="fas fa-users text-xl"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm font-medium text-gray-500">Active Researchers</p>
+                                            <p class="text-2xl font-bold text-gray-900">3,742</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-white rounded-lg shadow p-6">
+                                    <div class="flex items-center">
+                                        <div class="p-3 rounded-full bg-primary-100 text-primary-700 mr-4">
+                                            <i class="fas fa-globe text-xl"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm font-medium text-gray-500">Countries</p>
+                                            <p class="text-2xl font-bold text-gray-900">92</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Featured articles -->
+                            <div class="mb-8">
+                                <h2 class="text-xl font-bold text-gray-900 mb-4">Featured Articles</h2>
+                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                    <!-- Article 1 -->
+                                    <div class="bg-white rounded-lg shadow overflow-hidden hover:shadow-md transition-shadow duration-300">
+                                        <div class="p-6">
+                                            <div class="flex items-center mb-3">
+                                                <span class="inline-block px-2 py-1 text-xs font-semibold text-primary-800 bg-primary-100 rounded-full">Biology</span>
+                                                <span class="ml-auto text-sm text-gray-500">May 15, 2023</span>
+                                            </div>
+                                            <h3 class="text-lg font-bold text-gray-900 mb-2">Ecological Impacts of Climate Change on Tropical Forests</h3>
+                                            <p class="text-gray-600 mb-4">A comprehensive study on the long-term effects of rising temperatures on biodiversity in tropical ecosystems.</p>
+                                            <div class="flex items-center">
+                                                <img class="w-8 h-8 rounded-full mr-2" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Author">
+                                                <span class="text-sm font-medium text-gray-700">Dr. Maria Rodriguez</span>
+                                            </div>
+                                        </div>
+                                        <div class="px-6 py-3 bg-gray-50 border-t border-gray-100">
+                                            <div class="flex items-center justify-between">
+                                                <div class="flex items-center">
+                                                    <i class="fas fa-eye text-gray-400 mr-1"></i>
+                                                    <span class="text-sm text-gray-500">1.2k views</span>
+                                                </div>
+                                                <a href="#" class="text-sm font-medium text-primary-600 hover:text-primary-700">Read more →</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Article 2 -->
+                                    <div class="bg-white rounded-lg shadow overflow-hidden hover:shadow-md transition-shadow duration-300">
+                                        <div class="p-6">
+                                            <div class="flex items-center mb-3">
+                                                <span class="inline-block px-2 py-1 text-xs font-semibold text-primary-800 bg-primary-100 rounded-full">Medicine</span>
+                                                <span class="ml-auto text-sm text-gray-500">April 28, 2023</span>
+                                            </div>
+                                            <h3 class="text-lg font-bold text-gray-900 mb-2">Breakthrough in Cancer Immunotherapy</h3>
+                                            <p class="text-gray-600 mb-4">Novel approach to enhancing T-cell responses shows promising results in early clinical trials.</p>
+                                            <div class="flex items-center">
+                                                <img class="w-8 h-8 rounded-full mr-2" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Author">
+                                                <span class="text-sm font-medium text-gray-700">Dr. James Chen</span>
+                                            </div>
+                                        </div>
+                                        <div class="px-6 py-3 bg-gray-50 border-t border-gray-100">
+                                            <div class="flex items-center justify-between">
+                                                <div class="flex items-center">
+                                                    <i class="fas fa-eye text-gray-400 mr-1"></i>
+                                                    <span class="text-sm text-gray-500">2.4k views</span>
+                                                </div>
+                                                <a href="#" class="text-sm font-medium text-primary-600 hover:text-primary-700">Read more →</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Article 3 -->
+                                    <div class="bg-white rounded-lg shadow overflow-hidden hover:shadow-md transition-shadow duration-300">
+                                        <div class="p-6">
+                                            <div class="flex items-center mb-3">
+                                                <span class="inline-block px-2 py-1 text-xs font-semibold text-primary-800 bg-primary-100 rounded-full">Computer Science</span>
+                                                <span class="ml-auto text-sm text-gray-500">April 10, 2023</span>
+                                            </div>
+                                            <h3 class="text-lg font-bold text-gray-900 mb-2">Quantum Algorithms for Optimization Problems</h3>
+                                            <p class="text-gray-600 mb-4">New theoretical framework demonstrates significant speedup for certain classes of optimization problems.</p>
+                                            <div class="flex items-center">
+                                                <img class="w-8 h-8 rounded-full mr-2" src="https://randomuser.me/api/portraits/women/68.jpg" alt="Author">
+                                                <span class="text-sm font-medium text-gray-700">Dr. Priya Patel</span>
+                                            </div>
+                                        </div>
+                                        <div class="px-6 py-3 bg-gray-50 border-t border-gray-100">
+                                            <div class="flex items-center justify-between">
+                                                <div class="flex items-center">
+                                                    <i class="fas fa-eye text-gray-400 mr-1"></i>
+                                                    <span class="text-sm text-gray-500">1.8k views</span>
+                                                </div>
+                                                <a href="#" class="text-sm font-medium text-primary-600 hover:text-primary-700">Read more →</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Call to action -->
+                            <div class="bg-primary-700 rounded-lg shadow-lg p-8 mb-8">
+                                <div class="md:flex md:items-center md:justify-between">
+                                    <div class="md:w-2/3 mb-4 md:mb-0">
+                                        <h2 class="text-2xl font-bold text-white mb-2">Ready to submit your research?</h2>
+                                        <p class="text-primary-100">Join our community of researchers and contribute to the advancement of knowledge.</p>
+                                    </div>
+                                    <div class="md:w-1/3 flex justify-end">
+                                        <a href="#" data-page="submissions" class="sidebar-link inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-primary-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                                            Submit Manuscript
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Recent issues -->
+                            <div class="mb-8">
+                                <h2 class="text-xl font-bold text-gray-900 mb-4">Recent Issues</h2>
+                                <div class="bg-white rounded-lg shadow overflow-hidden">
+                                    <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gray-200">
+                                        <!-- Issue 1 -->
+                                        <div class="p-6">
+                                            <div class="flex items-center mb-4">
+                                                <div class="p-2 rounded-lg bg-primary-100 text-primary-700 mr-4">
+                                                    <i class="fas fa-book text-xl"></i>
+                                                </div>
+                                                <div>
+                                                    <h3 class="text-lg font-bold text-gray-900">Vol. 12, No. 3</h3>
+                                                    <p class="text-sm text-gray-500">June 2023</p>
+                                                </div>
+                                            </div>
+                                            <ul class="space-y-3">
+                                                <li class="flex items-start">
+                                                    <span class="flex-shrink-0 h-5 w-5 text-primary-500 mt-0.5">
+                                                        <i class="fas fa-file-pdf"></i>
+                                                    </span>
+                                                    <span class="ml-2 text-sm text-gray-700 hover:text-primary-600">
+                                                        <a href="#">Climate Change Adaptation Strategies</a>
+                                                    </span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <span class="flex-shrink-0 h-5 w-5 text-primary-500 mt-0.5">
+                                                        <i class="fas fa-file-pdf"></i>
+                                                    </span>
+                                                    <span class="ml-2 text-sm text-gray-700 hover:text-primary-600">
+                                                        <a href="#">Urban Planning for Sustainability</a>
+                                                    </span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <span class="flex-shrink-0 h-5 w-5 text-primary-500 mt-0.5">
+                                                        <i class="fas fa-file-pdf"></i>
+                                                    </span>
+                                                    <span class="ml-2 text-sm text-gray-700 hover:text-primary-600">
+                                                        <a href="#">Renewable Energy Innovations</a>
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                            <div class="mt-4">
+                                                <a href="#" class="text-sm font-medium text-primary-600 hover:text-primary-700">View all articles →</a>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Issue 2 -->
+                                        <div class="p-6">
+                                            <div class="flex items-center mb-4">
+                                                <div class="p-2 rounded-lg bg-primary-100 text-primary-700 mr-4">
+                                                    <i class="fas fa-book text-xl"></i>
+                                                </div>
+                                                <div>
+                                                    <h3 class="text-lg font-bold text-gray-900">Vol. 12, No. 2</h3>
+                                                    <p class="text-sm text-gray-500">April 2023</p>
+                                                </div>
+                                            </div>
+                                            <ul class="space-y-3">
+                                                <li class="flex items-start">
+                                                    <span class="flex-shrink-0 h-5 w-5 text-primary-500 mt-0.5">
+                                                        <i class="fas fa-file-pdf"></i>
+                                                    </span>
+                                                    <span class="ml-2 text-sm text-gray-700 hover:text-primary-600">
+                                                        <a href="#">Advances in Genetic Engineering</a>
+                                                    </span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <span class="flex-shrink-0 h-5 w-5 text-primary-500 mt-0.5">
+                                                        <i class="fas fa-file-pdf"></i>
+                                                    </span>
+                                                    <span class="ml-2 text-sm text-gray-700 hover:text-primary-600">
+                                                        <a href="#">Nanotechnology in Medicine</a>
+                                                    </span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <span class="flex-shrink-0 h-5 w-5 text-primary-500 mt-0.5">
+                                                        <i class="fas fa-file-pdf"></i>
+                                                    </span>
+                                                    <span class="ml-2 text-sm text-gray-700 hover:text-primary-600">
+                                                        <a href="#">AI in Healthcare Diagnostics</a>
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                            <div class="mt-4">
+                                                <a href="#" class="text-sm font-medium text-primary-600 hover:text-primary-700">View all articles →</a>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Issue 3 -->
+                                        <div class="p-6">
+                                            <div class="flex items-center mb-4">
+                                                <div class="p-2 rounded-lg bg-primary-100 text-primary-700 mr-4">
+                                                    <i class="fas fa-book text-xl"></i>
+                                                </div>
+                                                <div>
+                                                    <h3 class="text-lg font-bold text-gray-900">Vol. 12, No. 1</h3>
+                                                    <p class="text-sm text-gray-500">February 2023</p>
+                                                </div>
+                                            </div>
+                                            <ul class="space-y-3">
+                                                <li class="flex items-start">
+                                                    <span class="flex-shrink-0 h-5 w-5 text-primary-500 mt-0.5">
+                                                        <i class="fas fa-file-pdf"></i>
+                                                    </span>
+                                                    <span class="ml-2 text-sm text-gray-700 hover:text-primary-600">
+                                                        <a href="#">Sustainable Agriculture Practices</a>
+                                                    </span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <span class="flex-shrink-0 h-5 w-5 text-primary-500 mt-0.5">
+                                                        <i class="fas fa-file-pdf"></i>
+                                                    </span>
+                                                    <span class="ml-2 text-sm text-gray-700 hover:text-primary-600">
+                                                        <a href="#">Ocean Conservation Strategies</a>
+                                                    </span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <span class="flex-shrink-0 h-5 w-5 text-primary-500 mt-0.5">
+                                                        <i class="fas fa-file-pdf"></i>
+                                                    </span>
+                                                    <span class="ml-2 text-sm text-gray-700 hover:text-primary-600">
+                                                        <a href="#">Climate Policy Effectiveness</a>
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                            <div class="mt-4">
+                                                <a href="#" class="text-sm font-medium text-primary-600 hover:text-primary-700">View all articles →</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- About page content (hidden by default) -->
+                    <div data-page-content="about" class="hidden p-6">
+                        <div class="max-w-7xl mx-auto">
+                            <div class="mb-8">
+                                <h1 class="text-3xl font-bold text-gray-900 mb-4">About Gulu University Journal</h1>
+                                
+                                <div class="bg-white rounded-lg shadow overflow-hidden mb-8">
+                                    <div class="p-6">
+                                        <h2 class="text-xl font-bold text-gray-900 mb-4">Journal Overview</h2>
+                                        <div class="prose max-w-none text-gray-600">
+                                            <p>Gulu University Journal is an international, peer-reviewed, open-access journal dedicated to publishing high-quality research across all academic disciplines. Established in 2010, our journal has grown to become a respected platform for researchers worldwide to share their findings with the global academic community.</p>
+                                            
+                                            <p>Our mission is to advance knowledge and foster innovation by providing a rigorous yet efficient publication process that maintains the highest standards of academic excellence while promoting accessibility and sustainability in scholarly communication.</p>
+                                            
+                                            <h3 class="text-lg font-bold text-gray-900 mt-6 mb-2">Scope</h3>
+                                            <p>Gulu University Journal welcomes submissions from all fields of study, including but not limited to:</p>
+                                            <ul class="list-disc pl-5 mt-2">
+                                                <li>Natural Sciences</li>
+                                                <li>Engineering and Technology</li>
+                                                <li>Medical and Health Sciences</li>
+                                                <li>Agricultural Sciences</li>
+                                                <li>Social Sciences</li>
+                                                <li>Humanities</li>
+                                                <li>Interdisciplinary Studies</li>
+                                            </ul>
+                                            
+                                            <h3 class="text-lg font-bold text-gray-900 mt-6 mb-2">Open Access Policy</h3>
+                                            <p>Gulu University Journal is committed to the principles of open access. All articles published in our journal are immediately and permanently available online for anyone to read, download, and share, free of charge. We believe this approach maximizes the visibility, readership, and impact of the research we publish.</p>
+                                            
+                                            <h3 class="text-lg font-bold text-gray-900 mt-6 mb-2">Peer Review Process</h3>
+                                            <p>All submissions undergo a rigorous double-blind peer review process:</p>
+                                            <ol class="list-decimal pl-5 mt-2">
+                                                <li>Initial editorial screening for scope and quality</li>
+                                                <li>Assignment to at least two independent experts in the field</li>
+                                                <li>Double-blind review process (typically 4-6 weeks)</li>
+                                                <li>Editorial decision based on reviewer recommendations</li>
+                                                <li>Opportunity for revision if required</li>
+                                            </ol>
+                                            
+                                            <h3 class="text-lg font-bold text-gray-900 mt-6 mb-2">Indexing and Metrics</h3>
+                                            <p>Gulu University Journal is indexed in major academic databases including:</p>
+                                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+                                                <div class="flex items-center">
+                                                    <img src="https://via.placeholder.com/80x40?text=Scopus" alt="Scopus" class="h-8">
+                                                </div>
+                                                <div class="flex items-center">
+                                                    <img src="https://via.placeholder.com/80x40?text=Web+of+Science" alt="Web of Science" class="h-8">
+                                                </div>
+                                                <div class="flex items-center">
+                                                    <img src="https://via.placeholder.com/80x40?text=DOAJ" alt="DOAJ" class="h-8">
+                                                </div>
+                                                <div class="flex items-center">
+                                                    <img src="https://via.placeholder.com/80x40?text=Google+Scholar" alt="Google Scholar" class="h-8">
+                                                </div>
+                                            </div>
+                                            
+                                            <p class="mt-4">Current metrics (2023):</p>
+                                            <ul class="list-disc pl-5 mt-2">
+                                                <li>Impact Factor: 3.42</li>
+                                                <li>5-year Impact Factor: 3.78</li>
+                                                <li>Acceptance Rate: 28%</li>
+                                                <li>Average time to first decision: 32 days</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div class="bg-white rounded-lg shadow overflow-hidden">
+                                        <div class="p-6">
+                                            <h2 class="text-xl font-bold text-gray-900 mb-4">Editorial Policies</h2>
+                                            <div class="prose max-w-none text-gray-600">
+                                                <p>Gulu University Journal adheres to the highest standards of publication ethics and follows the guidelines established by the Committee on Publication Ethics (COPE).</p>
+                                                
+                                                <h3 class="text-lg font-bold text-gray-900 mt-4 mb-2">Authorship</h3>
+                                                <p>All listed authors must have made significant contributions to the research and approved the final version of the manuscript.</p>
+                                                
+                                                <h3 class="text-lg font-bold text-gray-900 mt-4 mb-2">Originality</h3>
+                                                <p>Submissions must represent original work that has not been published previously and is not under consideration elsewhere.</p>
+                                                
+                                                <h3 class="text-lg font-bold text-gray-900 mt-4 mb-2">Plagiarism</h3>
+                                                <p>All submissions are screened for plagiarism. Manuscripts with unacceptable levels of similarity to other works will be rejected.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="bg-white rounded-lg shadow overflow-hidden">
+                                        <div class="p-6">
+                                            <h2 class="text-xl font-bold text-gray-900 mb-4">Publication Ethics</h2>
+                                            <div class="prose max-w-none text-gray-600">
+                                                <h3 class="text-lg font-bold text-gray-900 mb-2">Responsibilities of Editors</h3>
+                                                <p>Editors evaluate manuscripts based on intellectual content without regard to race, gender, sexual orientation, religious belief, ethnic origin, citizenship, or political philosophy.</p>
+                                                
+                                                <h3 class="text-lg font-bold text-gray-900 mt-4 mb-2">Responsibilities of Reviewers</h3>
+                                                <p>Reviewers must maintain confidentiality of the review process and declare any conflicts of interest.</p>
+                                                
+                                                <h3 class="text-lg font-bold text-gray-900 mt-4 mb-2">Responsibilities of Authors</h3>
+                                                <p>Authors must present accurate results and discussion, provide proper attribution, and disclose any conflicts of interest.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Submissions page content (hidden by default) -->
+                    <div data-page-content="submissions" class="hidden p-6">
+                        <div class="max-w-7xl mx-auto">
+                            <div class="mb-8">
+                                <h1 class="text-3xl font-bold text-gray-900 mb-4">Submit Your Manuscript</h1>
+                                
+                                <div class="bg-white rounded-lg shadow overflow-hidden mb-8">
+                                    <div class="p-6">
+                                        <div class="mb-6">
+                                            <h2 class="text-xl font-bold text-gray-900 mb-2">Submission Process</h2>
+                                            <p class="text-gray-600">To submit your manuscript to Gulu University Journal, please follow the steps below. Ensure you have reviewed our <a href="#" class="text-primary-600 hover:text-primary-700">Author Guidelines</a> before submitting.</p>
+                                        </div>
+                                        
+                                        <!-- Submission steps -->
+                                        <div class="mb-8">
+                                            <div class="relative">
+                                                <!-- Step 1 -->
+                                                <div class="flex items-start mb-8">
+                                                    <div class="flex-shrink-0 bg-primary-100 rounded-full p-3 mr-4">
+                                                        <span class="text-primary-700 font-bold">1</span>
+                                                    </div>
+                                                    <div class="mt-1">
+                                                        <h3 class="text-lg font-bold text-gray-900 mb-2">Prepare Your Manuscript</h3>
+                                                        <p class="text-gray-600">Ensure your manuscript follows our formatting guidelines:</p>
+                                                        <ul class="list-disc pl-5 mt-2 text-gray-600">
+                                                            <li>Microsoft Word (.docx) or LaTeX format</li>
+                                                            <li>12pt Times New Roman font, double-spaced</li>
+                                                            <li>Structured abstract (250 words max)</li>
+                                                            <li>All figures and tables embedded in the document</li>
+                                                            <li>Supplementary files uploaded separately</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Step 2 -->
+                                                <div class="flex items-start mb-8">
+                                                    <div class="flex-shrink-0 bg-primary-100 rounded-full p-3 mr-4">
+                                                        <span class="text-primary-700 font-bold">2</span>
+                                                    </div>
+                                                    <div class="mt-1">
+                                                        <h3 class="text-lg font-bold text-gray-900 mb-2">Create an Account</h3>
+                                                        <p class="text-gray-600">You'll need an author account to submit your manuscript. If you don't have one yet, please register first.</p>
+                                                        <div class="mt-4">
+                                                            <button id="registerBtn" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                                                                Register as Author
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Step 3 -->
+                                                <div class="flex items-start mb-8">
+                                                    <div class="flex-shrink-0 bg-primary-100 rounded-full p-3 mr-4">
+                                                        <span class="text-primary-700 font-bold">3</span>
+                                                    </div>
+                                                    <div class="mt-1">
+                                                        <h3 class="text-lg font-bold text-gray-900 mb-2">Submit Your Manuscript</h3>
+                                                        <p class="text-gray-600">Once logged in, you can start a new submission. You'll be guided through the submission process step by step.</p>
+                                                        <div class="mt-4">
+                                                            <button id="loginBtn" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 mr-3">
+                                                                Author Login
+                                                            </button>
+                                                            <button id="startSubmissionBtn" class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                                                                Start New Submission
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Step 4 -->
+                                                <div class="flex items-start">
+                                                    <div class="flex-shrink-0 bg-primary-100 rounded-full p-3 mr-4">
+                                                        <span class="text-primary-700 font-bold">4</span>
+                                                    </div>
+                                                    <div class="mt-1">
+                                                        <h3 class="text-lg font-bold text-gray-900 mb-2">Track Your Submission</h3>
+                                                        <p class="text-gray-600">After submission, you can track the progress of your manuscript through the peer review process in your author dashboard.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Submission form (hidden by default) -->
+                                        <div id="submissionForm" class="hidden">
+                                            <div class="border-b border-gray-200 pb-4 mb-6">
+                                                <h2 class="text-xl font-bold text-gray-900">New Submission</h2>
+                                            </div>
+                                            
+                                            <form id="manuscriptForm">
+                                                <div class="grid grid-cols-1 gap-6 mb-6">
+                                                    <div>
+                                                        <label for="submissionType" class="block text-sm font-medium text-gray-700 mb-1">Submission Type</label>
+                                                        <select id="submissionType" name="submissionType" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md">
+                                                            <option value="research-article">Research Article</option>
+                                                            <option value="review-article">Review Article</option>
+                                                            <option value="short-communication">Short Communication</option>
+                                                            <option value="case-study">Case Study</option>
+                                                            <option value="special-issue">Special Issue Contribution</option>
+                                                        </select>
+                                                    </div>
+                                                    
+                                                    <div>
+                                                        <label for="title" class="block text-sm font-medium text-gray-700 mb-1">Title</label>
+                                                        <input type="text" id="title" name="title" class="mt-1 focus:ring-primary-500 focus:border-primary-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                    </div>
+                                                    
+                                                    <div>
+                                                        <label for="abstract" class="block text-sm font-medium text-gray-700 mb-1">Abstract</label>
+                                                        <textarea id="abstract" name="abstract" rows="4" class="shadow-sm focus:ring-primary-500 focus:border-primary-500 block w-full sm:text-sm border border-gray-300 rounded-md"></textarea>
+                                                        <p class="mt-2 text-sm text-gray-500">Structured abstract recommended (Background, Methods, Results, Conclusions)</p>
+                                                    </div>
+                                                    
+                                                    <div>
+                                                        <label for="keywords" class="block text-sm font-medium text-gray-700 mb-1">Keywords</label>
+                                                        <input type="text" id="keywords" name="keywords" class="mt-1 focus:ring-primary-500 focus:border-primary-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                        <p class="mt-2 text-sm text-gray-500">Separate keywords with commas (e.g., climate change, sustainability, policy)</p>
+                                                    </div>
+                                                    
+                                                    <div>
+                                                        <label class="block text-sm font-medium text-gray-700 mb-1">Authors</label>
+                                                        <div id="authorsContainer">
+                                                            <div class="flex items-center mb-2">
+                                                                <input type="text" name="author[]" placeholder="Full Name" class="flex-1 mr-2 focus:ring-primary-500 focus:border-primary-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                                <input type="email" name="authorEmail[]" placeholder="Email" class="flex-1 focus:ring-primary-500 focus:border-primary-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                                <button type="button" class="ml-2 text-red-500 hover:text-red-700 remove-author">
+                                                                    <i class="fas fa-times"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <button type="button" id="addAuthorBtn" class="mt-2 inline-flex items-center px-3 py-1 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                                                            <i class="fas fa-plus mr-1"></i> Add Author
+                                                        </button>
+                                                    </div>
+                                                    
+                                                    <div>
+                                                        <label for="manuscriptFile" class="block text-sm font-medium text-gray-700 mb-1">Manuscript File</label>
+                                                        <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                                                            <div class="space-y-1 text-center">
+                                                                <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                                                                    <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                                </svg>
+                                                                <div class="flex text-sm text-gray-600">
+                                                                    <label for="manuscriptFile" class="relative cursor-pointer bg-white rounded-md font-medium text-primary-600 hover:text-primary-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-primary-500">
+                                                                        <span>Upload a file</span>
+                                                                        <input id="manuscriptFile" name="manuscriptFile" type="file" class="sr-only">
+                                                                    </label>
+                                                                    <p class="pl-1">or drag and drop</p>
+                                                                </div>
+                                                                <p class="text-xs text-gray-500">DOCX, PDF, or LaTeX files up to 10MB</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div>
+                                                        <label for="coverLetter" class="block text-sm font-medium text-gray-700 mb-1">Cover Letter</label>
+                                                        <textarea id="coverLetter" name="coverLetter" rows="4" class="shadow-sm focus:ring-primary-500 focus:border-primary-500 block w-full sm:text-sm border border-gray-300 rounded-md"></textarea>
+                                                        <p class="mt-2 text-sm text-gray-500">Optional: Include a cover letter to the editor explaining the significance of your work</p>
+                                                    </div>
+                                                    
+                                                    <div class="flex items-start">
+                                                        <div class="flex items-center h-5">
+                                                            <input id="ethicsStatement" name="ethicsStatement" type="checkbox" class="focus:ring-primary-500 h-4 w-4 text-primary-600 border-gray-300 rounded">
+                                                        </div>
+                                                        <div class="ml-3 text-sm">
+                                                            <label for="ethicsStatement" class="font-medium text-gray-700">Ethics Statement</label>
+                                                            <p class="text-gray-500">I confirm that this submission complies with the journal's ethical requirements, including approval by an appropriate ethics committee/institutional review board where relevant.</p>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="flex items-start">
+                                                        <div class="flex items-center h-5">
+                                                            <input id="copyrightAgreement" name="copyrightAgreement" type="checkbox" class="focus:ring-primary-500 h-4 w-4 text-primary-600 border-gray-300 rounded">
+                                                        </div>
+                                                        <div class="ml-3 text-sm">
+                                                            <label for="copyrightAgreement" class="font-medium text-gray-700">Copyright Agreement</label>
+                                                            <p class="text-gray-500">I agree to the <a href="#" class="text-primary-600 hover:text-primary-500">terms and conditions</a> of publication, including the assignment of copyright to the publisher, and I confirm that all co-authors have approved the manuscript for submission.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="flex justify-end">
+                                                    <button type="button" id="cancelSubmissionBtn" class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                                                        Cancel
+                                                    </button>
+                                                    <button type="submit" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                                                        Submit Manuscript
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        
+                                        <!-- Login modal (hidden by default) -->
+                                        <div id="loginModal" class="hidden fixed inset-0 z-50 overflow-y-auto">
+                                            <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                                                <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+                                                    <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+                                                </div>
+                                                
+                                                <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+                                                
+                                                <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                                                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                                                        <div class="sm:flex sm:items-start">
+                                                            <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-primary-100 sm:mx-0 sm:h-10 sm:w-10">
+                                                                <i class="fas fa-user text-primary-600"></i>
+                                                            </div>
+                                                            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                                                                <h3 class="text-lg leading-6 font-medium text-gray-900" id="modalTitle">Author Login</h3>
+                                                                <div class="mt-2">
+                                                                    <form id="loginForm" class="space-y-4">
+                                                                        <div>
+                                                                            <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
+                                                                            <input type="email" id="email" name="email" class="mt-1 focus:ring-primary-500 focus:border-primary-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                                        </div>
+                                                                        
+                                                                        <div>
+                                                                            <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                                                                            <input type="password" id="password" name="password" class="mt-1 focus:ring-primary-500 focus:border-primary-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                                        </div>
+                                                                        
+                                                                        <div class="flex items-center justify-between">
+                                                                            <div class="flex items-center">
+                                                                                <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                                                                <label for="remember-me" class="ml-2 block text-sm text-gray-900">Remember me</label>
+                                                                            </div>
+                                                                            
+                                                                            <div class="text-sm">
+                                                                                <a href="#" class="font-medium text-primary-600 hover:text-primary-500">Forgot your password?</a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                                                        <button type="button" id="loginSubmitBtn" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary-600 text-base font-medium text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:ml-3 sm:w-auto sm:text-sm">
+                                                            Sign in
+                                                        </button>
+                                                        <button type="button" id="cancelLoginBtn" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                                                            Cancel
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Register modal (hidden by default) -->
+                                        <div id="registerModal" class="hidden fixed inset-0 z-50 overflow-y-auto">
+                                            <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                                                <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+                                                    <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+                                                </div>
+                                                
+                                                <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+                                                
+                                                <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                                                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                                                        <div class="sm:flex sm:items-start">
+                                                            <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-primary-100 sm:mx-0 sm:h-10 sm:w-10">
+                                                                <i class="fas fa-user-plus text-primary-600"></i>
+                                                            </div>
+                                                            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                                                                <h3 class="text-lg leading-6 font-medium text-gray-900">Create Author Account</h3>
+                                                                <div class="mt-2">
+                                                                    <form id="registerForm" class="space-y-4">
+                                                                        <div>
+                                                                            <label for="regName" class="block text-sm font-medium text-gray-700">Full Name</label>
+                                                                            <input type="text" id="regName" name="regName" class="mt-1 focus:ring-primary-500 focus:border-primary-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                                        </div>
+                                                                        
+                                                                        <div>
+                                                                            <label for="regEmail" class="block text-sm font-medium text-gray-700">Email address</label>
+                                                                            <input type="email" id="regEmail" name="regEmail" class="mt-1 focus:ring-primary-500 focus:border-primary-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                                        </div>
+                                                                        
+                                                                        <div>
+                                                                            <label for="regPassword" class="block text-sm font-medium text-gray-700">Password</label>
+                                                                            <input type="password" id="regPassword" name="regPassword" class="mt-1 focus:ring-primary-500 focus:border-primary-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                                        </div>
+                                                                        
+                                                                        <div>
+                                                                            <label for="regConfirmPassword" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+                                                                            <input type="password" id="regConfirmPassword" name="regConfirmPassword" class="mt-1 focus:ring-primary-500 focus:border-primary-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                                        </div>
+                                                                        
+                                                                        <div>
+                                                                            <label for="regInstitution" class="block text-sm font-medium text-gray-700">Institution/Affiliation</label>
+                                                                            <input type="text" id="regInstitution" name="regInstitution" class="mt-1 focus:ring-primary-500 focus:border-primary-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                                        </div>
+                                                                        
+                                                                        <div class="flex items-start">
+                                                                            <div class="flex items-center h-5">
+                                                                                <input id="regTerms" name="regTerms" type="checkbox" class="focus:ring-primary-500 h-4 w-4 text-primary-600 border-gray-300 rounded">
+                                                                            </div>
+                                                                            <div class="ml-3 text-sm">
+                                                                                <label for="regTerms" class="font-medium text-gray-700">I agree to the <a href="#" class="text-primary-600 hover:text-primary-500">terms and conditions</a></label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                                                        <button type="button" id="registerSubmitBtn" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary-600 text-base font-medium text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:ml-3 sm:w-auto sm:text-sm">
+                                                            Register
+                                                        </button>
+                                                        <button type="button" id="cancelRegisterBtn" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                                                            Cancel
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Submission guidelines -->
+                                <div class="bg-white rounded-lg shadow overflow-hidden">
+                                    <div class="p-6">
+                                        <h2 class="text-xl font-bold text-gray-900 mb-4">Submission Guidelines</h2>
+                                        
+                                        <div class="prose max-w-none text-gray-600">
+                                            <h3 class="text-lg font-bold text-gray-900 mt-4 mb-2">Manuscript Preparation</h3>
+                                            <p>All submissions must be prepared according to the following guidelines:</p>
+                                            
+                                            <h4 class="font-bold text-gray-900 mt-3 mb-1">Structure</h4>
+                                            <p>Research articles should generally include the following sections:</p>
+                                            <ul class="list-disc pl-5 mt-2">
+                                                <li>Title page with author information</li>
+                                                <li>Abstract (structured recommended)</li>
+                                                <li>Keywords (3-6 terms)</li>
+                                                <li>Introduction</li>
+                                                <li>Materials and Methods</li>
+                                                <li>Results</li>
+                                                <li>Discussion</li>
+                                                <li>Conclusions</li>
+                                                <li>Acknowledgments (if applicable)</li>
+                                                <li>References</li>
+                                                <li>Figures and Tables with captions</li>
+                                            </ul>
+                                            
+                                            <h4 class="font-bold text-gray-900 mt-3 mb-1">Formatting</h4>
+                                            <ul class="list-disc pl-5 mt-2">
+                                                <li>12-point Times New Roman font</li>
+                                                <li>Double-spaced text</li>
+                                                <li>1-inch (2.5 cm) margins on all sides</li>
+                                                <li>Continuous line numbering</li>
+                                                <li>Page numbers in footer</li>
+                                            </ul>
+                                            
+                                            <h3 class="text-lg font-bold text-gray-900 mt-6 mb-2">References</h3>
+                                            <p>References should follow APA (7th edition) style. Examples:</p>
+                                            
+                                            <div class="bg-gray-50 p-4 rounded-md mt-2">
+                                                <p class="text-sm font-medium text-gray-700">Journal Article:</p>
+                                                <p class="text-sm text-gray-600 mt-1">Author, A. A., & Author, B. B. (Year). Title of article. <span class="italic">Journal Name, volume</span>(issue), page range. https://doi.org/xxxx</p>
+                                                
+                                                <p class="text-sm font-medium text-gray-700 mt-3">Book:</p>
+                                                <p class="text-sm text-gray-600 mt-1">Author, A. A. (Year). <span class="italic">Title of work</span>. Publisher.</p>
+                                                
+                                                <p class="text-sm font-medium text-gray-700 mt-3">Website:</p>
+                                                <p class="text-sm text-gray-600 mt-1">Author, A. A. (Year, Month Day). <span class="italic">Title of page</span>. Site Name. URL</p>
+                                            </div>
+                                            
+                                            <h3 class="text-lg font-bold text-gray-900 mt-6 mb-2">Figures and Tables</h3>
+                                            <ul class="list-disc pl-5 mt-2">
+                                                <li>High-resolution (minimum 300 dpi) figures in TIFF, EPS, or PDF format</li>
+                                                <li>Figures should be submitted as separate files in addition to being embedded in the manuscript</li>
+                                                <li>Tables should be editable (created in Word, not as images)</li>
+                                                <li>All figures and tables must be cited in the text</li>
+                                            </ul>
+                                            
+                                            <h3 class="text-lg font-bold text-gray-900 mt-6 mb-2">Supplementary Materials</h3>
+                                            <p>Additional files (datasets, code, extended methods, etc.) can be submitted as supplementary materials. These will be published online alongside the article.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Current Issue page content (hidden by default) -->
+                    <div data-page-content="current" class="hidden p-6">
+                        <div class="max-w-7xl mx-auto">
+                            <div class="mb-8">
+                                <h1 class="text-3xl font-bold text-gray-900 mb-2">Current Issue: Volume 12, Number 3 (June 2023)</h1>
+                                <p class="text-lg text-gray-600">Published on June 15, 2023</p>
+                            </div>
+                            
+                            <!-- Issue details -->
+                            <div class="bg-white rounded-lg shadow overflow-hidden mb-8">
+                                <div class="p-6">
+                                    <div class="flex flex-col md:flex-row">
+                                        <div class="md:w-1/3 mb-6 md:mb-0">
+                                            <div class="bg-primary-50 rounded-lg p-6 h-full">
+                                                <h2 class="text-xl font-bold text-gray-900 mb-4">Issue Information</h2>
+                                                <div class="space-y-3">
+                                                    <div>
+                                                        <p class="text-sm font-medium text-gray-500">Volume</p>
+                                                        <p class="text-gray-900">12</p>
+                                                    </div>
+                                                    <div>
+                                                        <p class="text-sm font-medium text-gray-500">Number</p>
+                                                        <p class="text-gray-900">3</p>
+                                                    </div>
+                                                    <div>
+                                                        <p class="text-sm font-medium text-gray-500">Publication Date</p>
+                                                        <p class="text-gray-900">June 15, 2023</p>
+                                                    </div>
+                                                    <div>
+                                                        <p class="text-sm font-medium text-gray-500">Pages</p>
+                                                        <p class="text-gray-900">1-248</p>
+                                                    </div>
+                                                    <div>
+                                                        <p class="text-sm font-medium text-gray-500">DOI</p>
+                                                        <p class="text-gray-900">10.1234/sg.2023.12.3</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="md:w-2/3 md:pl-6">
+                                            <h2 class="text-xl font-bold text-gray-900 mb-4">Editorial</h2>
+                                            <div class="prose max-w-none text-gray-600">
+                                                <p>Welcome to the June 2023 issue of Gulu University Journal. This edition features groundbreaking research across multiple disciplines, with a special focus on sustainability and environmental science.</p>
+                                                
+                                                <p class="mt-4">The issue opens with an important study on climate change adaptation strategies in tropical regions, followed by innovative approaches to urban planning that prioritize green spaces and biodiversity. Our medical section includes a clinical trial report on a novel immunotherapy approach that shows promising results.</p>
+                                                
+                                                <p class="mt-4">We're particularly proud to include this quarter's Editor's Choice article: "Quantum Algorithms for Optimization Problems" by Dr. Priya Patel and colleagues, which demonstrates significant theoretical advances with potential applications across multiple fields.</p>
+                                                
+                                                <p class="mt-4">As always, we thank our authors, reviewers, and editorial board for their contributions to maintaining the high quality of research published in Gulu University Journal.</p>
+                                                
+                                                <div class="mt-6 flex items-center">
+                                                    <img class="w-12 h-12 rounded-full mr-4" src="https://randomuser.me/api/portraits/men/65.jpg" alt="Editor">
+                                                    <div>
+                                                        <p class="font-medium text-gray-900">Dr. Michael Johnson</p>
+                                                        <p class="text-sm text-gray-500">Editor-in-Chief, Gulu University Journal</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Articles list -->
+                            <div class="mb-8">
+                                <h2 class="text-xl font-bold text-gray-900 mb-4">Articles</h2>
+                                
+                                <!-- Editor's choice -->
+                                <div class="bg-primary-50 border-l-4 border-primary-500 rounded-r-lg p-4 mb-6">
+                                    <div class="flex">
+                                        <div class="flex-shrink-0">
+                                            <i class="fas fa-star text-primary-500"></i>
+                                        </div>
+                                        <div class="ml-3">
+                                            <h3 class="text-sm font-bold text-primary-800">EDITOR'S CHOICE</h3>
+                                            <div class="mt-1 text-sm text-primary-700">
+                                                <p>This article has been selected by the Editor-in-Chief as particularly noteworthy and significant to the field.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Article list -->
+                                <div class="bg-white shadow overflow-hidden rounded-lg divide-y divide-gray-200">
+                                    <!-- Article 1 -->
+                                    <div class="p-6">
+                                        <div class="flex flex-col md:flex-row md:items-start">
+                                            <div class="md:w-3/4">
+                                                <h3 class="text-lg font-bold text-gray-900 mb-2">Quantum Algorithms for Optimization Problems: A New Theoretical Framework</h3>
+                                                <p class="text-gray-600 mb-4">This paper presents a novel theoretical framework for quantum algorithms that demonstrates polynomial speedup for certain classes of optimization problems previously thought to be resistant to quantum advantage.</p>
+                                                
+                                                <div class="flex flex-wrap items-center text-sm text-gray-500">
+                                                    <div class="flex items-center mr-4 mb-2">
+                                                        <i class="fas fa-user mr-1"></i>
+                                                        <span>Priya Patel, Chen Wei, Maria Rodriguez</span>
+                                                    </div>
+                                                    <div class="flex items-center mr-4 mb-2">
+                                                        <i class="fas fa-calendar mr-1"></i>
+                                                        <span>Published: June 15, 2023</span>
+                                                    </div>
+                                                    <div class="flex items-center mr-4 mb-2">
+                                                        <i class="fas fa-file-alt mr-1"></i>
+                                                        <span>Pages: 15-42</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="mt-4 md:mt-0 md:w-1/4 md:pl-4">
+                                                <div class="flex flex-col items-end">
+                                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 mb-2">
+                                                        Computer Science
+                                                    </span>
+                                                    <div class="flex space-x-2">
+                                                        <button class="inline-flex items-center px-3 py-1 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                                                            <i class="fas fa-file-pdf mr-1"></i> PDF
+                                                        </button>
+                                                        <button class="inline-flex items-center px-3 py-1 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                                                            <i class="fas fa-info-circle mr-1"></i> Details
+                                                        </button>
+                                                    </div>
+                                                    <div class="mt-2 text-sm text-gray-500">
+                                                        <span>DOI: 10.1234/sg.2023.12.3.1</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Article 2 -->
+                                    <div class="p-6">
+                                        <div class="flex flex-col md:flex-row md:items-start">
+                                            <div class="md:w-3/4">
+                                                <h3 class="text-lg font-bold text-gray-900 mb-2">Climate Change Adaptation Strategies in Tropical Forest Ecosystems</h3>
+                                                <p class="text-gray-600 mb-4">A comprehensive 10-year study evaluating the effectiveness of various adaptation strategies implemented in tropical forests across Southeast Asia and South America, with recommendations for policy makers.</p>
+                                                
+                                                <div class="flex flex-wrap items-center text-sm text-gray-500">
+                                                    <div class="flex items-center mr-4 mb-2">
+                                                        <i class="fas fa-user mr-1"></i>
+                                                        <span>James Wilson, Amina Bah, Carlos Mendez, et al.</span>
+                                                    </div>
+                                                    <div class="flex items-center mr-4 mb-2">
+                                                        <i class="fas fa-calendar mr-1"></i>
+                                                        <span>Published: June 15, 2023</span>
+                                                    </div>
+                                                    <div class="flex items-center mr-4 mb-2">
+                                                        <i class="fas fa-file-alt mr-1"></i>
+                                                        <span>Pages: 43-78</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="mt-4 md:mt-0 md:w-1/4 md:pl-4">
+                                                <div class="flex flex-col items-end">
+                                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 mb-2">
+                                                        Environmental Science
+                                                    </span>
+                                                    <div class="flex space-x-2">
+                                                        <button class="inline-flex items-center px-3 py-1 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                                                            <i class="fas fa-file-pdf mr-1"></i> PDF
+                                                        </button>
+                                                        <button class="inline-flex items-center px-3 py-1 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                                                            <i class="fas fa-info-circle mr-1"></i> Details
+                                                        </button>
+                                                    </div>
+                                                    <div class="mt-2 text-sm text-gray-500">
+                                                        <span>DOI: 10.1234/sg.2023.12.3.2</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Article 3 -->
+                                    <div class="p-6">
+                                        <div class="flex flex-col md:flex-row md:items-start">
+                                            <div class="md:w-3/4">
+                                                <h3 class="text-lg font-bold text-gray-900 mb-2">Urban Green Spaces and Biodiversity: A Global Meta-Analysis</h3>
+                                                <p class="text-gray-600 mb-4">Meta-analysis of 127 studies from 42 countries demonstrating the positive correlation between urban green space design and biodiversity conservation in city environments.</p>
+                                                
+                                                <div class="flex flex-wrap items-center text-sm text-gray-500">
+                                                    <div class="flex items-center mr-4 mb-2">
+                                                        <i class="fas fa-user mr-1"></i>
+                                                        <span>Sophie Martin, Hiroshi Tanaka, Nadia Ali</span>
+                                                    </div>
+                                                    <div class="flex items-center mr-4 mb-2">
+                                                        <i class="fas fa-calendar mr-1"></i>
+                                                        <span>Published: June 15, 2023</span>
+                                                    </div>
+                                                    <div class="flex items-center mr-4 mb-2">
+                                                        <i class="fas fa-file-alt mr-1"></i>
+                                                        <span>Pages: 79-112</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="mt-4 md:mt-0 md:w-1/4 md:pl-4">
+                                                <div class="flex flex-col items-end">
+                                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 mb-2">
+                                                        Urban Planning
+                                                    </span>
+                                                    <div class="flex space-x-2">
+                                                        <button class="inline-flex items-center px-3 py-1 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                                                            <i class="fas fa-file-pdf mr-1"></i> PDF
+                                                        </button>
+                                                        <button class="inline-flex items-center px-3 py-1 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                                                            <i class="fas fa-info-circle mr-1"></i> Details
+                                                        </button>
+                                                    </div>
+                                                    <div class="mt-2 text-sm text-gray-500">
+                                                        <span>DOI: 10.1234/sg.2023.12.3.3</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Article 4 -->
+                                    <div class="p-6">
+                                        <div class="flex flex-col md:flex-row md:items-start">
+                                            <div class="md:w-3/4">
+                                                <h3 class="text-lg font-bold text-gray-900 mb-2">Phase II Clinical Trial of Novel Immunotherapy for Non-Small Cell Lung Cancer</h3>
+                                                <p class="text-gray-600 mb-4">Results from a multicenter phase II clinical trial demonstrating the safety and efficacy of a new T-cell enhancing immunotherapy approach in treatment-resistant NSCLC patients.</p>
+                                                
+                                                <div class="flex flex-wrap items-center text-sm text-gray-500">
+                                                    <div class="flex items-center mr-4 mb-2">
+                                                        <i class="fas fa-user mr-1"></i>
+                                                        <span>Robert Chen, Emma Wilson, et al.</span>
+                                                    </div>
+                                                    <div class="flex items-center mr-4 mb-2">
+                                                        <i class="fas fa-calendar mr-1"></i>
+                                                        <span>Published: June 15, 2023</span>
+                                                    </div>
+                                                    <div class="flex items-center mr-4 mb-2">
+                                                        <i class="fas fa-file-alt mr-1"></i>
+                                                        <span>Pages: 113-148</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="mt-4 md:mt-0 md:w-1/4 md:pl-4">
+                                                <div class="flex flex-col items-end">
+                                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 mb-2">
+                                                        Medicine
+                                                    </span>
+                                                    <div class="flex space-x-2">
+                                                        <button class="inline-flex items-center px-3 py-1 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                                                            <i class="fas fa-file-pdf mr-1"></i> PDF
+                                                        </button>
+                                                        <button class="inline-flex items-center px-3 py-1 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                                                            <i class="fas fa-info-circle mr-1"></i> Details
+                                                        </button>
+                                                    </div>
+                                                    <div class="mt-2 text-sm text-gray-500">
+                                                        <span>DOI: 10.1234/sg.2023.12.3.4</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Article 5 -->
+                                    <div class="p-6">
+                                        <div class="flex flex-col md:flex-row md:items-start">
+                                            <div class="md:w-3/4">
+                                                <h3 class="text-lg font-bold text-gray-900 mb-2">Sustainable Agriculture Practices in Arid Regions: A 5-Year Comparative Study</h3>
+                                                <p class="text-gray-600 mb-4">Evaluation of water conservation techniques and drought-resistant crop varieties in arid regions of Africa and the Middle East, with quantitative analysis of yield improvements and sustainability metrics.</p>
+                                                
+                                                <div class="flex flex-wrap items-center text-sm text-gray-500">
+                                                    <div class="flex items-center mr-4 mb-2">
+                                                        <i class="fas fa-user mr-1"></i>
+                                                        <span>Fatima Al-Mansoori, John Peterson, et al.</span>
+                                                    </div>
+                                                    <div class="flex items-center mr-4 mb-2">
+                                                        <i class="fas fa-calendar mr-1"></i>
+                                                        <span>Published: June 15, 2023</span>
+                                                    </div>
+                                                    <div class="flex items-center mr-4 mb-2">
+                                                        <i class="fas fa-file-alt mr-1"></i>
+                                                        <span>Pages: 149-182</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="mt-4 md:mt-0 md:w-1/4 md:pl-4">
+                                                <div class="flex flex-col items-end">
+                                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 mb-2">
+                                                        Agriculture
+                                                    </span>
+                                                    <div class="flex space-x-2">
+                                                        <button class="inline-flex items-center px-3 py-1 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                                                            <i class="fas fa-file-pdf mr-1"></i> PDF
+                                                        </button>
+                                                        <button class="inline-flex items-center px-3 py-1 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                                                            <i class="fas fa-info-circle mr-1"></i> Details
+                                                        </button>
+                                                    </div>
+                                                    <div class="mt-2 text-sm text-gray-500">
+                                                        <span>DOI: 10.1234/sg.2023.12.3.5</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Pagination -->
+                            <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6 rounded-b-lg">
+                                <div class="flex-1 flex justify-between sm:hidden">
+                                    <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                                        Previous
+                                    </a>
+                                    <a href="#" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                                        Next
+                                    </a>
+                                </div>
+                                <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                                    <div>
+                                        <p class="text-sm text-gray-700">
+                                            Showing <span class="font-medium">1</span> to <span class="font-medium">5</span> of <span class="font-medium">12</span> articles
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                                            <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                                <span class="sr-only">Previous</span>
+                                                <i class="fas fa-chevron-left"></i>
+                                            </a>
+                                            <a href="#" aria-current="page" class="z-10 bg-primary-50 border-primary-500 text-primary-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
+                                                1
+                                            </a>
+                                            <a href="#" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
+                                                2
+                                            </a>
+                                            <a href="#" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
+                                                3
+                                            </a>
+                                            <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700">
+                                                ...
+                                            </span>
+                                            <a href="#" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
+                                                8
+                                            </a>
+                                            <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                                <span class="sr-only">Next</span>
+                                                <i class="fas fa-chevron-right"></i>
+                                            </a>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Archive page content (hidden by default) -->
+                    <div data-page-content="archive" class="hidden p-6">
+                        <div class="max-w-7xl mx-auto">
+                            <div class="mb-8">
+                                <h1 class="text-3xl font-bold text-gray-900 mb-2">Journal Archives</h1>
+                                <p class="text-lg text-gray-600">Browse past issues of Gulu University Journal</p>
+                            </div>
+                            
+                            <!-- Search and filter -->
+                            <div class="bg-white rounded-lg shadow p-6 mb-8">
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    <div>
+                                        <label for="searchArchives" class="block text-sm font-medium text-gray-700 mb-1">Search Archives</label>
+                                        <div class="mt-1 relative rounded-md shadow-sm">
+                                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                                <i class="fas fa-search text-gray-400"></i>
+                                            </div>
+                                            <input type="text" name="searchArchives" id="searchArchives" class="focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md" placeholder="Search articles...">
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <label for="yearFilter" class="block text-sm font-medium text-gray-700 mb-1">Year</label>
+                                        <select id="yearFilter" name="yearFilter" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md">
+                                            <option>All Years</option>
+                                            <option>2023</option>
+                                            <option>2022</option>
+                                            <option>2021</option>
+                                            <option>2020</option>
+                                            <option>2019</option>
+                                            <option>2018</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div>
+                                        <label for="subjectFilter" class="block text-sm font-medium text-gray-700 mb-1">Subject Area</label>
+                                        <select id="subjectFilter" name="subjectFilter" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md">
+                                            <option>All Subjects</option>
+                                            <option>Natural Sciences</option>
+                                            <option>Medicine & Health</option>
+                                            <option>Engineering</option>
+                                            <option>Social Sciences</option>
+                                            <option>Humanities</option>
+                                            <option>Interdisciplinary</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Years accordion -->
+                            <div class="mb-8">
+                                <h2 class="text-xl font-bold text-gray-900 mb-4">Browse by Year</h2>
+                                
+                                <div class="bg-white shadow overflow-hidden rounded-lg">
+                                    <!-- 2023 -->
+                                    <div class="border-b border-gray-200">
+                                        <button class="archive-year-btn w-full px-6 py-4 text-left focus:outline-none">
+                                            <div class="flex items-center justify-between">
+                                                <span class="text-lg font-medium text-gray-900">2023</span>
+                                                <i class="fas fa-chevron-down text-gray-500 transform transition-transform duration-200"></i>
+                                            </div>
+                                        </button>
+                                        <div class="archive-year-content hidden px-6 pb-4">
+                                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                                <a href="#" class="group block p-4 border border-gray-200 rounded-lg hover:border-primary-300 hover:bg-primary-50">
+                                                    <h3 class="text-base font-medium text-gray-900 group-hover:text-primary-700">Volume 12, Number 3</h3>
+                                                    <p class="mt-1 text-sm text-gray-500">June 2023</p>
+                                                    <p class="mt-2 text-sm text-gray-600">15 articles</p>
+                                                </a>
+                                                
+                                                <a href="#" class="group block p-4 border border-gray-200 rounded-lg hover:border-primary-300 hover:bg-primary-50">
+                                                    <h3 class="text-base font-medium text-gray-900 group-hover:text-primary-700">Volume 12, Number 2</h3>
+                                                    <p class="mt-1 text-sm text-gray-500">April 2023</p>
+                                                    <p class="mt-2 text-sm text-gray-600">12 articles</p>
+                                                </a>
+                                                
+                                                <a href="#" class="group block p-4 border border-gray-200 rounded-lg hover:border-primary-300 hover:bg-primary-50">
+                                                    <h3 class="text-base font-medium text-gray-900 group-hover:text-primary-700">Volume 12, Number 1</h3>
+                                                    <p class="mt-1 text-sm text-gray-500">February 2023</p>
+                                                    <p class="mt-2 text-sm text-gray-600">14 articles</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 2022 -->
+                                    <div class="border-b border-gray-200">
+                                        <button class="archive-year-btn w-full px-6 py-4 text-left focus:outline-none">
+                                            <div class="flex items-center justify-between">
+                                                <span class="text-lg font-medium text-gray-900">2022</span>
+                                                <i class="fas fa-chevron-down text-gray-500 transform transition-transform duration-200"></i>
+                                            </div>
+                                        </button>
+                                        <div class="archive-year-content hidden px-6 pb-4">
+                                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                                <a href="#" class="group block p-4 border border-gray-200 rounded-lg hover:border-primary-300 hover:bg-primary-50">
+                                                    <h3 class="text-base font-medium text-gray-900 group-hover:text-primary-700">Volume 11, Number 4</h3>
+                                                    <p class="mt-1 text-sm text-gray-500">December 2022</p>
+                                                    <p class="mt-2 text-sm text-gray-600">16 articles</p>
+                                                </a>
+                                                
+                                                <a href="#" class="group block p-4 border border-gray-200 rounded-lg hover:border-primary-300 hover:bg-primary-50">
+                                                    <h3 class="text-base font-medium text-gray-900 group-hover:text-primary-700">Volume 11, Number 3</h3>
+                                                    <p class="mt-1 text-sm text-gray-500">September 2022</p>
+                                                    <p class="mt-2 text-sm text-gray-600">13 articles</p>
+                                                </a>
+                                                
+                                                <a href="#" class="group block p-4 border border-gray-200 rounded-lg hover:border-primary-300 hover:bg-primary-50">
+                                                    <h3 class="text-base font-medium text-gray-900 group-hover:text-primary-700">Volume 11, Number 2</h3>
+                                                    <p class="mt-1 text-sm text-gray-500">June 2022</p>
+                                                    <p class="mt-2 text-sm text-gray-600">15 articles</p>
+                                                </a>
+                                                
+                                                <a href="#" class="group block p-4 border border-gray-200 rounded-lg hover:border-primary-300 hover:bg-primary-50">
+                                                    <h3 class="text-base font-medium text-gray-900 group-hover:text-primary-700">Volume 11, Number 1</h3>
+                                                    <p class="mt-1 text-sm text-gray-500">March 2022</p>
+                                                    <p class="mt-2 text-sm text-gray-600">12 articles</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 2021 -->
+                                    <div class="border-b border-gray-200">
+                                        <button class="archive-year-btn w-full px-6 py-4 text-left focus:outline-none">
+                                            <div class="flex items-center justify-between">
+                                                <span class="text-lg font-medium text-gray-900">2021</span>
+                                                <i class="fas fa-chevron-down text-gray-500 transform transition-transform duration-200"></i>
+                                            </div>
+                                        </button>
+                                        <div class="archive-year-content hidden px-6 pb-4">
+                                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                                <a href="#" class="group block p-4 border border-gray-200 rounded-lg hover:border-primary-300 hover:bg-primary-50">
+                                                    <h3 class="text-base font-medium text-gray-900 group-hover:text-primary-700">Volume 10, Number 4</h3>
+                                                    <p class="mt-1 text-sm text-gray-500">December 2021</p>
+                                                    <p class="mt-2 text-sm text-gray-600">14 articles</p>
+                                                </a>
+                                                
+                                                <a href="#" class="group block p-4 border border-gray-200 rounded-lg hover:border-primary-300 hover:bg-primary-50">
+                                                    <h3 class="text-base font-medium text-gray-900 group-hover:text-primary-700">Volume 10, Number 3</h3>
+                                                    <p class="mt-1 text-sm text-gray-500">September 2021</p>
+                                                    <p class="mt-2 text-sm text-gray-600">12 articles</p>
+                                                </a>
+                                                
+                                                <a href="#" class="group block p-4 border border-gray-200 rounded-lg hover:border-primary-300 hover:bg-primary-50">
+                                                    <h3 class="text-base font-medium text-gray-900 group-hover:text-primary-700">Volume 10, Number 2</h3>
+                                                    <p class="mt-1 text-sm text-gray-500">June 2021</p>
+                                                    <p class="mt-2 text-sm text-gray-600">11 articles</p>
+                                                </a>
+                                                
+                                                <a href="#" class="group block p-4 border border-gray-200 rounded-lg hover:border-primary-300 hover:bg-primary-50">
+                                                    <h3 class="text-base font-medium text-gray-900 group-hover:text-primary-700">Volume 10, Number 1</h3>
+                                                    <p class="mt-1 text-sm text-gray-500">March 2021</p>
+                                                    <p class="mt-2 text-sm text-gray-600">10 articles</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 2020 -->
+                                    <div class="border-b border-gray-200">
+                                        <button class="archive-year-btn w-full px-6 py-4 text-left focus:outline-none">
+                                            <div class="flex items-center justify-between">
+                                                <span class="text-lg font-medium text-gray-900">2020</span>
+                                                <i class="fas fa-chevron-down text-gray-500 transform transition-transform duration-200"></i>
+                                            </div>
+                                        </button>
+                                        <div class="archive-year-content hidden px-6 pb-4">
+                                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                                <a href="#" class="group block p-4 border border-gray-200 rounded-lg hover:border-primary-300 hover:bg-primary-50">
+                                                    <h3 class="text-base font-medium text-gray-900 group-hover:text-primary-700">Volume 9, Number 4</h3>
+                                                    <p class="mt-1 text-sm text-gray-500">December 2020</p>
+                                                    <p class="mt-2 text-sm text-gray-600">12 articles</p>
+                                                </a>
+                                                
+                                                <a href="#" class="group block p-4 border border-gray-200 rounded-lg hover:border-primary-300 hover:bg-primary-50">
+                                                    <h3 class="text-base font-medium text-gray-900 group-hover:text-primary-700">Volume 9, Number 3</h3>
+                                                    <p class="mt-1 text-sm text-gray-500">September 2020</p>
+                                                    <p class="mt-2 text-sm text-gray-600">11 articles</p>
+                                                </a>
+                                                
+                                                <a href="#" class="group block p-4 border border-gray-200 rounded-lg hover:border-primary-300 hover:bg-primary-50">
+                                                    <h3 class="text-base font-medium text-gray-900 group-hover:text-primary-700">Volume 9, Number 2</h3>
+                                                    <p class="mt-1 text-sm text-gray-500">June 2020</p>
+                                                    <p class="mt-2 text-sm text-gray-600">10 articles</p>
+                                                </a>
+                                                
+                                                <a href="#" class="group block p-4 border border-gray-200 rounded-lg hover:border-primary-300 hover:bg-primary-50">
+                                                    <h3 class="text-base font-medium text-gray-900 group-hover:text-primary-700">Volume 9, Number 1</h3>
+                                                    <p class="mt-1 text-sm text-gray-500">March 2020</p>
+                                                    <p class="mt-2 text-sm text-gray-600">9 articles</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 2019 -->
+                                    <div class="border-b border-gray-200">
+                                        <button class="archive-year-btn w-full px-6 py-4 text-left focus:outline-none">
+                                            <div class="flex items-center justify-between">
+                                                <span class="text-lg font-medium text-gray-900">2019</span>
+                                                <i class="fas fa-chevron-down text-gray-500 transform transition-transform duration-200"></i>
+                                            </div>
+                                        </button>
+                                        <div class="archive-year-content hidden px-6 pb-4">
+                                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                                <a href="#" class="group block p-4 border border-gray-200 rounded-lg hover:border-primary-300 hover:bg-primary-50">
+                                                    <h3 class="text-base font-medium text-gray-900 group-hover:text-primary-700">Volume 8, Number 4</h3>
+                                                    <p class="mt-1 text-sm text-gray-500">December 2019</p>
+                                                    <p class="mt-2 text-sm text-gray-600">11 articles</p>
+                                                </a>
+                                                
+                                                <a href="#" class="group block p-4 border border-gray-200 rounded-lg hover:border-primary-300 hover:bg-primary-50">
+                                                    <h3 class="text-base font-medium text-gray-900 group-hover:text-primary-700">Volume 8, Number 3</h3>
+                                                    <p class="mt-1 text-sm text-gray-500">September 2019</p>
+                                                    <p class="mt-2 text-sm text-gray-600">10 articles</p>
+                                                </a>
+                                                
+                                                <a href="#" class="group block p-4 border border-gray-200 rounded-lg hover:border-primary-300 hover:bg-primary-50">
+                                                    <h3 class="text-base font-medium text-gray-900 group-hover:text-primary-700">Volume 8, Number 2</h3>
+                                                    <p class="mt-1 text-sm text-gray-500">June 2019</p>
+                                                    <p class="mt-2 text-sm text-gray-600">8 articles</p>
+                                                </a>
+                                                
+                                                <a href="#" class="group block p-4 border border-gray-200 rounded-lg hover:border-primary-300 hover:bg-primary-50">
+                                                    <h3 class="text-base font-medium text-gray-900 group-hover:text-primary-700">Volume 8, Number 1</h3>
+                                                    <p class="mt-1 text-sm text-gray-500">March 2019</p>
+                                                    <p class="mt-2 text-sm text-gray-600">9 articles</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 2018 -->
+                                    <div class="border-b border-gray-200">
+                                        <button class="archive-year-btn w-full px-6 py-4 text-left focus:outline-none">
+                                            <div class="flex items-center justify-between">
+                                                <span class="text-lg font-medium text-gray-900">2018</span>
+                                                <i class="fas fa-chevron-down text-gray-500 transform transition-transform duration-200"></i>
+                                            </div>
+                                        </button>
+                                        <div class="archive-year-content hidden px-6 pb-4">
+                                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                                <a href="#" class="group block p-4 border border-gray-200 rounded-lg hover:border-primary-300 hover:bg-primary-50">
+                                                    <h3 class="text-base font-medium text-gray-900 group-hover:text-primary-700">Volume 7, Number 4</h3>
+                                                    <p class="mt-1 text-sm text-gray-500">December 2018</p>
+                                                    <p class="mt-2 text-sm text-gray-600">10 articles</p>
+                                                </a>
+                                                
+                                                <a href="#" class="group block p-4 border border-gray-200 rounded-lg hover:border-primary-300 hover:bg-primary-50">
+                                                    <h3 class="text-base font-medium text-gray-900 group-hover:text-primary-700">Volume 7, Number 3</h3>
+                                                    <p class="mt-1 text-sm text-gray-500">September 2018</p>
+                                                    <p class="mt-2 text-sm text-gray-600">8 articles</p>
+                                                </a>
+                                                
+                                                <a href="#" class="group block p-4 border border-gray-200 rounded-lg hover:border-primary-300 hover:bg-primary-50">
+                                                    <h3 class="text-base font-medium text-gray-900 group-hover:text-primary-700">Volume 7, Number 2</h3>
+                                                    <p class="mt-1 text-sm text-gray-500">June 2018</p>
+                                                    <p class="mt-2 text-sm text-gray-600">7 articles</p>
+                                                </a>
+                                                
+                                                <a href="#" class="group block p-4 border border-gray-200 rounded-lg hover:border-primary-300 hover:bg-primary-50">
+                                                    <h3 class="text-base font-medium text-gray-900 group-hover:text-primary-700">Volume 7, Number 1</h3>
+                                                    <p class="mt-1 text-sm text-gray-500">March 2018</p>
+                                                    <p class="mt-2 text-sm text-gray-600">6 articles</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Special issues -->
+                            <div class="mb-8">
+                                <h2 class="text-xl font-bold text-gray-900 mb-4">Special Issues</h2>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                    <!-- Special issue 1 -->
+                                    <div class="bg-white rounded-lg shadow overflow-hidden hover:shadow-md transition-shadow duration-300">
+                                        <div class="p-6">
+                                            <span class="inline-block px-2 py-1 text-xs font-semibold text-primary-800 bg-primary-100 rounded-full mb-3">Climate Change</span>
+                                            <h3 class="text-lg font-bold text-gray-900 mb-2">Climate Change Adaptation Strategies</h3>
+                                            <p class="text-gray-600 mb-4">This special issue brings together research on innovative approaches to climate change adaptation across different ecosystems and human communities.</p>
+                                            <div class="flex items-center justify-between">
+                                                <span class="text-sm text-gray-500">Published: March 2023</span>
+                                                <a href="#" class="text-sm font-medium text-primary-600 hover:text-primary-700">View Issue →</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Special issue 2 -->
+                                    <div class="bg-white rounded-lg shadow overflow-hidden hover:shadow-md transition-shadow duration-300">
+                                        <div class="p-6">
+                                            <span class="inline-block px-2 py-1 text-xs font-semibold text-primary-800 bg-primary-100 rounded-full mb-3">Medicine</span>
+                                            <h3 class="text-lg font-bold text-gray-900 mb-2">Advances in Immunotherapy</h3>
+                                            <p class="text-gray-600 mb-4">Cutting-edge research on novel immunotherapeutic approaches for cancer, autoimmune diseases, and infectious diseases.</p>
+                                            <div class="flex items-center justify-between">
+                                                <span class="text-sm text-gray-500">Published: November 2022</span>
+                                                <a href="#" class="text-sm font-medium text-primary-600 hover:text-primary-700">View Issue →</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Special issue 3 -->
+                                    <div class="bg-white rounded-lg shadow overflow-hidden hover:shadow-md transition-shadow duration-300">
+                                        <div class="p-6">
+                                            <span class="inline-block px-2 py-1 text-xs font-semibold text-primary-800 bg-primary-100 rounded-full mb-3">Education</span>
+                                            <h3 class="text-lg font-bold text-gray-900 mb-2">Digital Transformation in Education</h3>
+                                            <p class="text-gray-600 mb-4">Research on the impact of digital technologies on teaching and learning at all levels of education.</p>
+                                            <div class="flex items-center justify-between">
+                                                <span class="text-sm text-gray-500">Published: August 2022</span>
+                                                <a href="#" class="text-sm font-medium text-primary-600 hover:text-primary-700">View Issue →</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Editorial Board page content (hidden by default) -->
+<div data-page-content="editorial" class="hidden p-6">
+    <div class="max-w-7xl mx-auto">
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">Editorial Board</h1>
+            <p class="text-lg text-gray-600">Meet our distinguished editorial team</p>
+        </div>
+
+        <!-- Editor in Chief -->
+        <div class="bg-white rounded-lg shadow overflow-hidden mb-8">
+            <div class="p-6">
+                <h2 class="text-xl font-bold text-gray-900 mb-4">Editor-in-Chief</h2>
+                <div class="flex items-start space-x-4">
+                    <img class="w-24 h-24 rounded-lg object-cover" src="https://randomuser.me/api/portraits/men/65.jpg" alt="Editor in Chief">
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-900">Dr. Michael Johnson</h3>
+                        <p class="text-gray-600">Professor of Environmental Sciences</p>
+                        <p class="text-gray-600">Gulu University</p>
+                        <p class="mt-2 text-gray-600">Ph.D. in Environmental Science from Oxford University</p>
+                        <div class="mt-3 flex space-x-3">
+                            <a href="#" class="text-primary-600 hover:text-primary-700">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="#" class="text-primary-600 hover:text-primary-700">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            <a href="#" class="text-primary-600 hover:text-primary-700">
+                                <i class="fas fa-globe"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Associate Editors -->
+        <div class="mb-8">
+            <h2 class="text-xl font-bold text-gray-900 mb-4">Associate Editors</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Associate Editor 1 -->
+                <div class="bg-white rounded-lg shadow overflow-hidden">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <img class="w-16 h-16 rounded-full object-cover" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Associate Editor">
+                            <div class="ml-4">
+                                <h3 class="text-lg font-bold text-gray-900">Dr. Maria Rodriguez</h3>
+                                <p class="text-gray-600">Biology</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">Specializes in tropical ecology and biodiversity conservation</p>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-primary-600 hover:text-primary-700">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="#" class="text-primary-600 hover:text-primary-700">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add more associate editors similarly -->
+            </div>
+        </div>
+
+        <!-- Editorial Board Members -->
+        <div class="mb-8">
+            <h2 class="text-xl font-bold text-gray-900 mb-4">Editorial Board Members</h2>
+            <div class="bg-white rounded-lg shadow overflow-hidden">
+                <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-gray-200">
+                    <!-- Natural Sciences -->
+                    <div class="p-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-4">Natural Sciences</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <img class="w-10 h-10 rounded-full" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Board Member">
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-gray-900">Dr. James Chen</p>
+                                    <p class="text-sm text-gray-500">Chemistry, Stanford University</p>
+                                </div>
+                            </li>
+                            <!-- Add more members -->
+                        </ul>
+                    </div>
+
+                    <!-- Social Sciences -->
+                    <div class="p-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-4">Social Sciences</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <img class="w-10 h-10 rounded-full" src="https://randomuser.me/api/portraits/women/68.jpg" alt="Board Member">
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-gray-900">Dr. Priya Patel</p>
+                                    <p class="text-sm text-gray-500">Economics, LSE</p>
+                                </div>
+                            </li>
+                            <!-- Add more members -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Contact page content (hidden by default) -->
+<div data-page-content="contact" class="hidden p-6">
+    <div class="max-w-7xl mx-auto">
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">Contact Us</h1>
+            <p class="text-lg text-gray-600">Get in touch with the editorial team</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <!-- Contact Information -->
+            <div class="col-span-1">
+                <div class="bg-white rounded-lg shadow overflow-hidden">
+                    <div class="p-6">
+                        <h2 class="text-xl font-bold text-gray-900 mb-4">Contact Information</h2>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-map-marker-alt text-primary-600"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-900 font-medium">Address</p>
+                                    <p class="text-gray-600">Gulu University<br>Laroo Division<br>Gulu, Uganda</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-envelope text-primary-600"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-900 font-medium">Email</p>
+                                    <p class="text-gray-600">journal@gu.ac.ug</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-phone text-primary-600"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-900 font-medium">Phone</p>
+                                    <p class="text-gray-600">+256 123 456 789</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="col-span-2">
+                <div class="bg-white rounded-lg shadow overflow-hidden">
+                    <div class="p-6">
+                        <h2 class="text-xl font-bold text-gray-900 mb-4">Send us a Message</h2>
+                        <form>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                                    <input type="text" name="name" id="name" class="mt-1 focus:ring-primary-500 focus:border-primary-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                                    <input type="email" name="email" id="email" class="mt-1 focus:ring-primary-500 focus:border-primary-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                </div>
+                                <div class="md:col-span-2">
+                                    <label for="subject" class="block text-sm font-medium text-gray-700">Subject</label>
+                                    <input type="text" name="subject" id="subject" class="mt-1 focus:ring-primary-500 focus:border-primary-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                </div>
+                                <div class="md:col-span-2">
+                                    <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
+                                    <textarea id="message" name="message" rows="4" class="mt-1 focus:ring-primary-500 focus:border-primary-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"></textarea>
+                                </div>
+                            </div>
+                            <div class="mt-6">
+                                <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                                    Send Message
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+</main>
+</div>
+</div>
+
+<script>
+// Mobile sidebar functionality
+document.getElementById('mobileSidebarButton').addEventListener('click', function() {
+    document.getElementById('mobileSidebar').classList.remove('-translate-x-full');
+    document.getElementById('mobileSidebarBackdrop').classList.remove('hidden');
+});
+
+document.getElementById('mobileSidebarBackdrop').addEventListener('click', function() {
+    document.getElementById('mobileSidebar').classList.add('-translate-x-full');
+    this.classList.add('hidden');
+});
+
+// Page navigation
+document.querySelectorAll('.sidebar-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Remove active state from all links
+        document.querySelectorAll('.sidebar-link').forEach(l => {
+            l.classList.remove('text-primary-700', 'bg-primary-50');
+            l.classList.add('text-gray-700', 'hover:text-primary-700', 'hover:bg-primary-50');
+        });
+        
+        // Add active state to clicked link
+        this.classList.remove('text-gray-700', 'hover:text-primary-700', 'hover:bg-primary-50');
+        this.classList.add('text-primary-700', 'bg-primary-50');
+        
+        // Hide all pages
+        document.querySelectorAll('[data-page-content]').forEach(page => {
+            page.classList.add('hidden');
+        });
+        
+        // Show selected page
+        const pageId = this.getAttribute('data-page');
+        document.querySelector(`[data-page-content="${pageId}"]`).classList.remove('hidden');
+        
+        // Close mobile sidebar
+        document.getElementById('mobileSidebar').classList.add('-translate-x-full');
+        document.getElementById('mobileSidebarBackdrop').classList.add('hidden');
+    });
+});
+
+// Archive page accordion
+document.querySelectorAll('.archive-year-btn').forEach(button => {
+    button.addEventListener('click', function() {
+        const content = this.nextElementSibling;
+        const icon = this.querySelector('.fa-chevron-down');
+        
+        content.classList.toggle('hidden');
+        icon.classList.toggle('rotate-180');
+    });
+});
+</script>
+
+</body>
+</html>
