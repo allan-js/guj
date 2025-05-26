@@ -3,7 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gulu University Journal | Academic Journal</title>
+    <title>Gulu University Journal | Academic Research & Publications</title>
+    <meta name="description" content="Gulu University Journal - A leading open-access academic journal publishing high-quality research across all disciplines. Access peer-reviewed articles, submit manuscripts, and explore scholarly content.">
+    <meta name="keywords" content="academic journal, research publication, scholarly articles, peer review, open access, Gulu University, academic research, scientific publications">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://journal.gu.ac.ug/">
+    <meta property="og:title" content="Gulu University Journal | Academic Research & Publications">
+    <meta property="og:description" content="Access peer-reviewed academic research articles across all disciplines. Submit manuscripts to a leading open-access journal.">
+    <meta property="og:image" content="og.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://journal.gu.ac.ug/">
+    <meta property="twitter:title" content="Gulu University Journal | Academic Research & Publications">
+    <meta property="twitter:description" content="Access peer-reviewed academic research articles across all disciplines. Submit manuscripts to a leading open-access journal.">
+    <meta property="twitter:image" content="og.png">
+    <meta name="twitter:site" content="@GuluUniversity">
+    <meta name="twitter:creator" content="@GuluUniversity">
+    <meta name="twitter:image:alt" content="Gulu University Journal Logo">
+    <meta name="twitter:label1" content="Published Articles">
+    <!-- Additional SEO -->
+    <meta name="author" content="Gulu University">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    <link rel="canonical" href="https://journal.gu.ac.ug/">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
@@ -256,6 +282,15 @@
                             <input class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 sm:text-sm" placeholder="Search articles..." type="search">
                         </div>
                     </div>
+
+                    <!-- Start Submission Button -->
+                    <button class="ml-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transform transition duration-200 ease-in-out hover:scale-105 group">
+                        <i class="fas fa-paper-plane mr-2 group-hover:animate-bounce"></i>
+                        <span class="relative">
+                            Start Submission
+                            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+                        </span>
+                    </button>
                     
                     <!-- Right side buttons -->
                     <div class="flex items-center space-x-4">
@@ -280,6 +315,32 @@
                 </div>
             </header>
             
+            <!-- Floating Back to Top Button -->
+            <button id="backToTopBtn" class="fixed bottom-4 right-4 p-3 rounded-full bg-primary-600 text-white shadow-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-opacity duration-300 opacity-0 invisible">
+                <i class="fas fa-arrow-up"></i>
+            </button>
+
+            <script>
+                // Back to Top Button functionality
+                const backToTopBtn = document.getElementById('backToTopBtn');
+
+                window.addEventListener('scroll', () => {
+                    if (window.pageYOffset > 300) { // Show button after scrolling 300px
+                        backToTopBtn.classList.remove('opacity-0', 'invisible');
+                        backToTopBtn.classList.add('opacity-100');
+                    } else {
+                        backToTopBtn.classList.add('opacity-0', 'invisible');
+                        backToTopBtn.classList.remove('opacity-100');
+                    }
+                });
+
+                backToTopBtn.addEventListener('click', () => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            </script>
             <!-- Main content -->
             <main class="flex-1 overflow-y-auto focus:outline-none bg-gray-50">
                 <!-- Page content -->
